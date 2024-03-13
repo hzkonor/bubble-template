@@ -23,7 +23,7 @@
   // Set colors
   let primary-color = rgb(main_color) // alpha = 100%
   // change alpha of primary color
-  let secondary-color = color.mix(color.rgb(100%, 100%, 100%, alpha), primary-color)
+  let secondary-color = color.mix(color.rgb(100%, 100%, 100%, alpha), primary-color, space:rgb)
 
   show "highlight" : it => text(fill: primary-color)[#it]
 
