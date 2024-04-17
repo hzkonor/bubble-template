@@ -1,18 +1,24 @@
 #import "template.typ": *
-#import "@preview/codelst:2.0.0": sourcecode
 
-#show: project.with(
+#set outline(title: "Table of contents")
+
+#show: bubble.with(
   title: "Bubble template",
   subtitle: "Simple and colorful template",
   author: "hzkonor",
   affiliation: "University",
   date: datetime.today().display(),
-  Licence: "Year",
-  UE: "Class",
-  logo: "assets/logo.png",
-  toc_title: "Table of contents"
+  year: "Year",
+  class: "Class",
+  //main-color: "4DA6FF",
+  logo: image("assets/logo.png"),
 ) 
 
+#outline()
+
+#pagebreak()
+
+// Edit this content to your liking
 
 = Introduction
 
@@ -21,7 +27,7 @@ This is a simple template that can be used for a report.
 = Features
 == Colorful items
 
-The main color can be set with the `color` property, wich affects inline code, lists, links and important items.
+The main color can be set with the `color` property, which affects inline code, lists, links and important items.
 
 - These bullet
 - points
@@ -31,14 +37,7 @@ The main color can be set with the `color` property, wich affects inline code, l
 + works with
 + numbered lists!
 
-This is an highlight. That can be set in the `template.typ` file.
-
-The package #link("https://github.com/jneug/typst-codelst")[codelst] is used by default, and you can add some more of your liking if you want.
-
-
 == Customized items
-
-The Table of Contents title can be modified with the `toc_title`property.
 
 
 Figures are customized but this is settable in the template file. You can of course reference them @ref.

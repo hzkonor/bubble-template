@@ -1,16 +1,17 @@
+#import "@preview/codelst:2.0.0": sourcecode
+
 // main project
-#let project(
+#let bubble(
   title: "",
   subtitle: "",
   author: "",
   affiliation: "",
-  Licence: none,
-  UE: none,
-  date: none,
+  year: none,
+  class: none,
+  date: datetime.today().display(),
   logo: none,
-  main_color: "E94845",
+  main-color: "E94845",
   alpha: 60%,
-  toc_title: "Table of contents",
   body,
 ) = {
   // Set the document's basic properties.
@@ -21,7 +22,7 @@
   let sans-font = "Open Sans"
 
   // Set colors
-  let primary-color = rgb(main_color) // alpha = 100%
+  let primary-color = rgb(main-color) // alpha = 100%
   // change alpha of primary color
   let secondary-color = color.mix(color.rgb(100%, 100%, 100%, alpha), primary-color, space:rgb)
 
@@ -76,7 +77,8 @@ set heading(numbering: (..nums) => {
   // Title page.
   // Logo at top right if given
   if logo != none {
-    place(top + right, image(logo, width: 35%))
+    set image(width: 6cm)
+    place(top + right, logo)
   }
   // decorations at top left
   place(top + left, dx: -35%, dy: -28%, circle(radius: 150pt, fill: primary-color))
@@ -99,7 +101,7 @@ set heading(numbering: (..nums) => {
   // Author information.
   align(center)[
       #text(author, 14pt, weight: "bold") \
-      #affiliation \ #Licence\ #emph[#UE] 
+      #affiliation \ #year\ #emph[#class] 
     ]
 
   pagebreak()
@@ -110,9 +112,6 @@ set heading(numbering: (..nums) => {
     numbering: "1 / 1", 
     number-align: center, 
     )
-  outline(depth: 3, indent: true, title: toc_title)
-  //useless pagebreak because using pagebreak before first heading and assuming that the page always starts with a heading
-  //pagebreak()
 
 
   // Main body.
