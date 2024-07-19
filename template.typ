@@ -15,32 +15,31 @@
   color-words: (),
   body,
 ) = {
-  // Set the document's basic properties.
   set document(author: author, title: title)
 
   // Save heading and body font families in variables.
-  let body-font = "Rethink Sans"
-  let sans-font = "Open Sans"
+  let body-font = "Source Sans Pro"
+  let title-font = "Barlow"
 
   // Set colors
   let primary-color = rgb(main-color) // alpha = 100%
   // change alpha of primary color
   let secondary-color = color.mix(color.rgb(100%, 100%, 100%, alpha), primary-color, space:rgb)
 
-  //highlight
-   show regex(color-words.join("|")): text.with(fill: primary-color)
-  
-  //customize look of figure
+  // highlight important words
+  show regex(color-words.join("|")): text.with(fill: primary-color)
+
+  // customize look of figure
   set figure.caption(separator: [ --- ], position: top)
 
-  //customize inline raw code
+  // customize inline raw code
   show raw.where(block: false) : it => h(0.5em) + box(fill: primary-color.lighten(90%), outset: 0.2em, it) + h(0.5em)
 
   // Set body font family.
-  set text(font: body-font, lang: "fr", 12pt)
-  show heading: set text(font: sans-font, fill: primary-color)
+  set text(font: body-font, 12pt)
+  show heading: set text(font: title-font, fill: primary-color)
 
-  //heading numbering
+  // heading numbering
 set heading(numbering: (..nums) => {
   let level = nums.pos().len()
   // only level 1 and 2 are numbered
@@ -54,14 +53,11 @@ set heading(numbering: (..nums) => {
   }
 })
  
+  // add space for heading
+  show heading.where(level:1): it => it + v(0.5em)
+
   // Set link style
   show link: it => underline(text(fill: primary-color, it))
-
-  //pagebreak before first heading and space after
-  //show heading.where(level:1): it => pagebreak(weak: true) + it + v(0.5em)
-
-  // no pagebreak before heading
-  show heading.where(level:1): it => it + v(0.5em)
 
   //numbered list colored
   set enum(indent: 1em, numbering: n => [#text(fill: primary-color, numbering("1.", n))])
@@ -72,9 +68,6 @@ set heading(numbering: (..nums) => {
 
   // display of outline entries
   show outline.entry: it => text(size: 12pt, weight: "regular",it)
-
-  //avoid C++ word break
-  show "C++": box
 
   // Title page.
   // Logo at top right if given
@@ -87,14 +80,14 @@ set heading(numbering: (..nums) => {
   place(top + left, dx: -10%, circle(radius: 75pt, fill: secondary-color))
   
   // decorations at bottom right
-  place(bottom +right, dx: 40%, dy: 30%, circle(radius: 150pt, fill: secondary-color))
+  place(bottom + right, dx: 40%, dy: 30%, circle(radius: 150pt, fill: secondary-color))
 
   
   v(2fr)
 
-  align(center, text(font: sans-font, 3em, weight: 700, title))
+  align(center, text(font: title-font, 3em, weight: 700, title))
   v(2em, weak: true)
-  align(center, text(font: sans-font, 2em, weight: 700, subtitle))
+  align(center, text(font: title-font, 2em, weight: 700, subtitle))
   v(2em, weak: true)
   align(center, text(1.1em, date))
 
@@ -118,22 +111,18 @@ set heading(numbering: (..nums) => {
 
   // Main body.
   set page(
-    header: [#emph()[#title #h(1fr) #author]],
-    // header: [#grid(
-    //   columns: (1fr, 1fr, 1fr),
-    //   rows: (auto),
-    //   [#align(left, emph(title))], [#align(top + center, subtitle)], [#align(top+ right,author)]
-    // )]
+    header: [#emph()[#title #h(1fr) #author]]
   )
   set par(justify: true)
 
   body
 
-  
 }
 
 //useful functions
 //set block-quote
 #let blockquote = rect.with(stroke: (left: 2.5pt + luma(170)), inset: (left: 1em))
+
+// use primary-color and secondary-color in main
 #let primary-color = rgb("E94845")
 #let secondary-color = rgb(255, 80, 69, 60%)

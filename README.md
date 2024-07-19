@@ -14,7 +14,7 @@ You can select a main color (default is `#E94845`) which is coloring :
 - links
 - inline blocks
 - headings
-- words in the `color-words` array
+- words in the `color-words` array (be careful to put a comma if you're highlighting one word : `("word",)`)
 
 Every page is numbered and has the title of the document and the name of the author at the top.
 

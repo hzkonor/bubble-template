@@ -14,7 +14,6 @@
   logo: image("assets/logo.png"),
   color-words: ("highlight", "important")
 ) 
-
 #outline()
 
 #pagebreak()
@@ -28,7 +27,7 @@ This is a simple template that can be used for a report.
 = Features
 == Colorful items
 
-The main color can be set with the `main-color` property, which affects inline code, lists, links and important items.
+The main color can be set with the `main-color` property, which affects inline code, lists, links and important items. For example, the words highlight and important are highlighted !
 
 - These bullet
 - points
