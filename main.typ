@@ -10,13 +10,10 @@
   date: datetime.today().display(),
   year: "Year",
   class: "Class",
-  //main-color: "4DA6FF",
-  logo: image("assets/logo.png"),
-  color-words: ("highlight", "important")
+  other: ("Made with Typst", "https://typst.com"),
+  //main-color: "4DA6FF", //set the main color
+  logo: image("assets/logo.png"), //set the logo
 ) 
-#outline()
-
-#pagebreak()
 
 // Edit this content to your liking
 
@@ -40,24 +37,14 @@ The main color can be set with the `main-color` property, which affects inline c
 == Customized items
 
 
-Figures are customized but this is settable in the template file. You can of course reference them @ref.
+Figures are customized but this is settable in the template file. You can of course reference them  : @ref.
 
-#figure(caption: [Source tree], kind: image,
-box(width: 65%,sourcecode(numbering:none,
-```bash
-main
-├── README.md
-├── assets
-│   ├── images
-│   │   ├── used images
-│   └── backup 
-│       └── backup files
-├── makefile
-└── src
-    ├── headers
-    │   ├── files.h
-    └── files.c
-```))
+#figure(caption: [Code example],
+```rust
+fn main() {
+  println!("Hello Typst!");
+}
+```
 )<ref>
 
 #pagebreak()

@@ -1,13 +1,12 @@
-#import "@preview/codelst:2.0.0": sourcecode
-
 // main project
 #let bubble(
   title: "",
-  subtitle: "",
+  subtitle: none,
   author: "",
-  affiliation: "",
+  affiliation: none,
   year: none,
   class: none,
+  other: none,
   date: datetime.today().display(),
   logo: none,
   main-color: "E94845",
@@ -29,17 +28,17 @@
   // highlight important words
   show regex(if color-words.len() == 0 { "$ " } else { color-words.join("|") }): text.with(fill: primary-color)
 
-  // customize look of figure
+  //customize look of figure
   set figure.caption(separator: [ --- ], position: top)
 
-  // customize inline raw code
+  //customize inline raw code
   show raw.where(block: false) : it => h(0.5em) + box(fill: primary-color.lighten(90%), outset: 0.2em, it) + h(0.5em)
 
   // Set body font family.
   set text(font: body-font, 12pt)
   show heading: set text(font: title-font, fill: primary-color)
 
-  // heading numbering
+  //heading numbering
 set heading(numbering: (..nums) => {
   let level = nums.pos().len()
   // only level 1 and 2 are numbered
@@ -52,10 +51,10 @@ set heading(numbering: (..nums) => {
     numbering(pattern, ..nums)
   }
 })
- 
+
   // add space for heading
   show heading.where(level:1): it => it + v(0.5em)
-
+ 
   // Set link style
   show link: it => underline(text(fill: primary-color, it))
 
@@ -80,23 +79,28 @@ set heading(numbering: (..nums) => {
   place(top + left, dx: -10%, circle(radius: 75pt, fill: secondary-color))
   
   // decorations at bottom right
-  place(bottom + right, dx: 40%, dy: 30%, circle(radius: 150pt, fill: secondary-color))
+  place(bottom +right, dx: 40%, dy: 30%, circle(radius: 150pt, fill: secondary-color))
 
   
   v(2fr)
 
   align(center, text(font: title-font, 3em, weight: 700, title))
   v(2em, weak: true)
+  if subtitle != none {
   align(center, text(font: title-font, 2em, weight: 700, subtitle))
   v(2em, weak: true)
+  }
   align(center, text(1.1em, date))
 
   v(2fr)
 
-  // Author information.
+  // Author and other information.
   align(center)[
-      #text(author, 14pt, weight: "bold") \
-      #affiliation \ #year\ #emph[#class] 
+      #if author != "" {strong(author); linebreak();}
+      #if affiliation != none {affiliation; linebreak();}
+      #if year != none {year; linebreak();}
+      #if class != none {emph(class); linebreak();}
+      #if other != none {emph(other.join(linebreak())); linebreak();}
     ]
 
   pagebreak()
@@ -116,7 +120,7 @@ set heading(numbering: (..nums) => {
   set par(justify: true)
 
   body
-
+  
 }
 
 //useful functions
